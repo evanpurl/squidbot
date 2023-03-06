@@ -19,7 +19,11 @@ class ServerCog(commands.Cog):
 
     @server.add_route(path="/", method="GET", cog="ServerCog")
     async def home(self, request):
-        return web.json_response(data={self.bot.user.name: self.bot.user.avatar.url}, status=200)
+        if not self.bot.user.avatar:
+            url = "nothing.png"
+        else:
+            url = self.bot.user.avatar.url
+        return web.json_response(data={self.bot.user.name: url}, status=200)
 
 
 async def setup(bot):
