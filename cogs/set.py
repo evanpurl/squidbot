@@ -34,6 +34,17 @@ class setcmd(commands.GroupCog, name="set"):
             await interaction.response.send_message(content=f"""Something went wrong.""", ephemeral=True)
 
 
+    @app_commands.command(name="messagechannel",
+                          description="Command used by a moderator or admin set the message channel")
+    @app_commands.checks.has_permissions(manage_messages=True)
+    async def messagechannel(self, interaction: discord.Interaction, channel: discord.TextChannel) -> None:
+        try:
+            await dbset(interaction.guild.id, self.bot.user.name, "messagechannelid", channel.id)
+            await interaction.response.send_message(content=f"Message channel set to {channel}.", ephemeral=True)
+        except Exception as e:
+            print(e)
+
+
     @welcomechannel.error
     @defaultrole.error
     async def onerror(self, interaction: discord.Interaction, error: app_commands.AppCommandError):

@@ -25,6 +25,7 @@ class infocmd(commands.Cog):
         app_commands.Choice(name='purge', value=3),
         app_commands.Choice(name='warn', value=4),
         app_commands.Choice(name='report', value=5),
+        app_commands.Choice(name='messagechannel', value=6),
     ])
     async def info(self, interaction: discord.Interaction, command: app_commands.Choice[int], ephemeral: bool = False):
         try:
@@ -56,6 +57,15 @@ class infocmd(commands.Cog):
                 await interaction.response.send_message(
                     embed=cmdembed(bot=self.bot, cmd="report",
                                    text="The /report command is used by members to report a member."),
+                    ephemeral=ephemeral)
+            elif command.value == 6:  # set messagechannel
+                await interaction.response.send_message(
+                    embed=cmdembed(bot=self.bot, cmd="set messagechannel", text="The /set messagechannel "
+                                                                                "command is used to set "
+                                                                                "your bot's message "
+                                                                                "channel, which tracks edits and "
+                                                                                "deletes of"
+                                                                                "messages."),
                     ephemeral=ephemeral)
 
         except Exception as e:

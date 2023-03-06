@@ -17,6 +17,7 @@ class resetcmd(commands.Cog):
     @app_commands.choices(config=[
         app_commands.Choice(name='Welcome Channel', value=1),
         app_commands.Choice(name='Default Role', value=2),
+        app_commands.Choice(name='Message Channel', value=3),
     ])
     async def reset(self, interaction: discord.Interaction, config: app_commands.Choice[int]) -> None:
         if config.value == 1:
@@ -25,6 +26,9 @@ class resetcmd(commands.Cog):
         elif config.value == 2:
             await dbset(interaction.guild.id, self.bot.user.name, "defaultroleid", 0)
             await interaction.response.send_message(f"Default role config has been reset.", ephemeral=True)
+        elif config.value == 3:
+            await dbset(interaction.guild.id, self.bot.user.name, "messagechannelid", 0)
+            await interaction.response.send_message(f"Message Log Channel config has been reset.", ephemeral=True)
 
     @reset.error
     async def reseterror(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
