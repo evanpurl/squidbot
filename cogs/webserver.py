@@ -9,7 +9,7 @@ class ServerCog(commands.Cog):
         self.server = server.HTTPServer(
             bot=self.bot,
             host="0.0.0.0",
-            port=25565,
+            port=27022,
         )
         self.bot.loop.create_task(self._start_server())
 
