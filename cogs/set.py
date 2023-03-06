@@ -36,7 +36,6 @@ class setcmd(commands.GroupCog, name="set"):
 
     @welcomechannel.error
     @defaultrole.error
-    @pingrole.error
     async def onerror(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
         await interaction.response.send_message(content=error,
                                                 ephemeral=True)
