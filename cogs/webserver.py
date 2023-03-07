@@ -13,7 +13,7 @@ class ServerCog(commands.Cog):
 
     async def webserver(self):
         async def handler(request):
-            if not self.bot.user.avatar.url:
+            if not self.bot.user.avatar:
                 pfp = 'nothing.png'
             else:
                 pfp = self.bot.user.avatar.url
